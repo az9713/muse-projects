@@ -1,10 +1,10 @@
 # Muse Projects — coding showcases
 
+**Live guide: https://az9713.github.io/muse-projects/**
+
 Seven small, self-contained projects demonstrating agentic coding workflows:
 multi-file migrations, cold-start feature work, test generation, polyglot
 scaffolding, docs-to-code generation, bug hunting, and self-healing CI.
-
-An `index.html` in this repo renders the same guide for browsing.
 
 | # | Project | What it is |
 |---|---------|------------|
