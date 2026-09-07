@@ -1,0 +1,46 @@
+{
+  "openapi": "3.0.0",
+  "info": {"title": "Tasks API", "version": "1.0.0"},
+  "paths": {
+    "/health": {
+      "get": {
+        "operationId": "getHealth",
+        "responses": {"200": {"description": "service status"}}
+      }
+    },
+    "/tasks": {
+      "get": {
+        "operationId": "listTasks",
+        "responses": {"200": {"description": "all tasks"}}
+      },
+      "post": {
+        "operationId": "createTask",
+        "requestBody": {
+          "required": ["title"],
+          "properties": {
+            "title": {"type": "string", "example": "Write report"},
+            "tags": {"type": "array", "example": ["work"]}
+          }
+        },
+        "responses": {"201": {"description": "created task"}}
+      }
+    },
+    "/tasks/{id}": {
+      "get": {
+        "operationId": "getTask",
+        "responses": {"200": {"description": "one task"}}
+      }
+    }
+  },
+  "schemas": {
+    "Task": {
+      "required": ["id", "title", "done", "tags"],
+      "properties": {
+        "id": {"type": "integer", "example": 1},
+        "title": {"type": "string", "example": "Write report"},
+        "done": {"type": "boolean", "example": false},
+        "tags": {"type": "array", "example": ["work"]}
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 """Order totals (5 injected bugs B1..B5, all fixed — see SOLUTIONS.md)."""
-from datetime import datetime
+from datetime import datetime, timezone
 
 CATALOG = {
     "widget": {"price": 10.00, "cost": 6.00},
@@ -28,11 +28,11 @@ def line_total(price, qty):
 
 
 def _parse(date_str):
-    return datetime.strptime(date_str, "%m/%d/%Y").date()
+    return datetime.strptime(date_str, "%m/%d/%Y").replace(tzinfo=timezone.utc).date()
 
 
 def promo_active(today=None):
-    today = _parse(today) if today else datetime.now().date()
+    today = _parse(today) if today else datetime.now(timezone.utc).date()
     return today <= _parse(PROMO_EXPIRY)
 
 

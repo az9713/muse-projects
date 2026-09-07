@@ -1,0 +1,44 @@
+name: ci
+on:
+  push:
+  pull_request:
+
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest ruff
+      - run: ruff check --fix . && ruff check .
+      - run: python -m pytest project-1-migration/python-sample/tests -q
+      - run: python -m pytest project-2-coldstart/python/tests -q
+      - run: python -m pytest project-3-test-swarm/python/tests -q
+      - run: python -m pytest project-4-polyglot/tests -q
+      - run: python -m pytest project-5-docs-to-code/tests -q
+      - run: python -m pytest project-6-bughunt/python/tests -q
+      - run: python project-5-docs-to-code/gen/generate.py && git diff --exit-code -- project-5-docs-to-code/out
+
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - run: node project-1-migration/js-sample/test/test-legacy.cjs
+      - run: node --test project-1-migration/js-sample/test/test-migrated.test.mjs
+      - run: node --test project-2-coldstart/js/test/tags.test.mjs
+      - run: node project-3-test-swarm/js/test/test-weak.mjs
+      - run: node --test project-3-test-swarm/js/test/test-full.test.mjs
+      - run: sh project-4-polyglot/e2e/check.sh
+      - run: node project-6-bughunt/js/repro/repro.mjs
+      - run: node --test project-6-bughunt/js/test/regress.test.mjs
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f docker/Dockerfile -t muse-projects .

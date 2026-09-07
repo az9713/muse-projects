@@ -1,13 +1,13 @@
 """LEGACY suite: unittest style (before migration). Run: python3 -m unittest discover -s tests -p 'test_*unittest.py' -t ."""
-import sys
 import os
+import sys
 import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from calc import add, sub, mul, div
-from strings import slugify, truncate, count_words
-from stats import mean, clamp, pct_change
+from calc import add, div, mul, sub
+from stats import clamp, mean, pct_change
+from strings import count_words, slugify, truncate
 
 
 class TestCalc(unittest.TestCase):

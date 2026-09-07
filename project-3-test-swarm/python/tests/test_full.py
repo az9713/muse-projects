@@ -5,7 +5,7 @@ import unittest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from billing import line_total, discount_rate, apply_discount, with_tax, invoice
+from billing import apply_discount, discount_rate, invoice, line_total, with_tax
 
 
 class TestLineTotal(unittest.TestCase):

@@ -66,6 +66,9 @@ footer{margin-top:2rem;font-size:.8rem;color:#555}
 <li><b>#3</b> <code>project-3-test-swarm/python</code> - weak 2 pass, full 23 pass under unittest + pytest (<code>.venv</code> included). <code>project-3-test-swarm/js</code> - weak 2 checks, full 23 pass.</li>
 <li><b>#2</b> <code>project-2-coldstart/python</code> - tags acceptance 10 pass (<code>.venv</code> included). <code>project-2-coldstart/js</code> - tags acceptance 10 pass.</li>
 <li><b>#6</b> <code>project-6-bughunt/python</code> - repro 0/5 red to 5/5 green, 7 regression tests (<code>.venv</code> included). <code>project-6-bughunt/js</code> - repro 0/5 red to 5/5 green, 5 regression tests. Fixes in <code>SOLUTIONS.md</code>, hunt template in <code>BUGLOG.md</code>.</li>
+<li><b>#4</b> <code>project-4-polyglot</code> - one Python CLI scaffolds TS/Go/Rust projects, 12 CLI tests, e2e runs generated suites (node + real cargo test green; go skipped, no toolchain).</li>
+<li><b>#5</b> <code>project-5-docs-to-code</code> - spec -&gt; generator -&gt; server + client + mocks, 10 contract tests green, regen drift-checked.</li>
+<li><b>#7</b> <code>heal.sh</code> + <code>.github/workflows/ci.yml</code> + <code>docker/Dockerfile</code> - full repo green in one command (91 python tests, all node suites, ruff). Docker image builds in CI; not verified locally (no daemon).</li>
 </ul>
 <footer>Local reference only. No external deps.</footer>
 </body>

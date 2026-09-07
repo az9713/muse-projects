@@ -4,9 +4,9 @@ import sys
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "src"))
 
-from calc import add, sub, mul, div
-from strings import slugify, truncate, count_words
-from stats import mean, clamp, pct_change
+from calc import add, div, mul, sub
+from stats import clamp, mean, pct_change
+from strings import count_words, slugify, truncate
 
 checks = [
     ("add", add(2, 3) == 5),

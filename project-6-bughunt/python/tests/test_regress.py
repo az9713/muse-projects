@@ -7,7 +7,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
 os.environ.pop("APP_DEBUG", None)
 
-from orders import bulk_rate, add_note, line_total, promo_active, receipt
+from orders import add_note, bulk_rate, line_total, promo_active, receipt
 
 
 class TestFixed(unittest.TestCase):
