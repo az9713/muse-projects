@@ -1,0 +1,10 @@
+{
+  "name": "js-bughunt",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "repro": "node repro/repro.mjs",
+    "test": "node --test test/regress.test.mjs"
+  }
+}

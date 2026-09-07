@@ -1,0 +1,6 @@
+FAIL B1 bulk_rate(100) == 0.20
+FAIL B2 add_note isolated
+FAIL B3 line_total(0.1, 3) == 0.3
+FAIL B4 receipt hides cost by default
+FAIL B5 promo over year boundary
+0/5 passed

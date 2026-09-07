@@ -1,0 +1,6 @@
+PASS J1 page has full size
+PASS J2 catalog shielded
+PASS J3 promo expires Dec 2026
+PASS J4 total is a number
+PASS J5 checkout adds fee
+5/5 passed

@@ -1,0 +1,6 @@
+FAIL J1 page has full size
+FAIL J2 catalog shielded
+FAIL J3 promo expires Dec 2026
+FAIL J4 total is a number
+FAIL J5 checkout adds fee
+0/5 passed
