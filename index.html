@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muse Projects — coding showcases</title>
+<style>
+body{font-family:monospace;max-width:860px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#111}
+h1{font-size:1.5rem}h2{font-size:1.15rem;margin-top:2.2rem;border-bottom:1px solid #ccc;padding-bottom:.3rem}
+pre{background:#f4f4f4;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.82rem}
+code{background:#f0f0f0;padding:.1rem .3rem;border-radius:3px}
+pre code{background:none;padding:0}
+.card{border:1px solid #ccc;padding:1rem 1.2rem;margin:1.2rem 0;border-radius:8px}
+.badge{display:inline-block;background:#111;color:#fff;font-size:.72rem;padding:.15rem .55rem;border-radius:4px;margin-bottom:.4rem}
+table{border-collapse:collapse;width:100%;font-size:.85rem}
+th,td{border:1px solid #ccc;padding:.35rem .5rem;text-align:left}
+footer{margin:2rem 0;font-size:.8rem;color:#555}
+</style>
+</head>
+<body>
+<h1>Muse Projects — coding showcases</h1>
+<p>Seven small, self-contained projects demonstrating agentic coding workflows.
+Each ships with runnable code, tests, and a README. Prerequisites: Python 3.10+
+with <code>uv</code>, Node 22+ (stdlib only, no <code>npm install</code> anywhere).
+Go, Cargo, and Docker unlock extra checks where noted.</p>
+
+<table>
+<tr><th>#</th><th>Project</th><th>What it is</th></tr>
+<tr><td>1</td><td><code>project-1-migration</code></td><td>Repo-wide migration runner</td></tr>
+<tr><td>2</td><td><code>project-2-coldstart</code></td><td>Cold-start feature across a layered app</td></tr>
+<tr><td>3</td><td><code>project-3-test-swarm</code></td><td>Weak test suite expanded to full coverage</td></tr>
+<tr><td>4</td><td><code>project-4-polyglot</code></td><td>One CLI scaffolds TS, Go, and Rust projects</td></tr>
+<tr><td>5</td><td><code>project-5-docs-to-code</code></td><td>Spec &#8594; server + client + mocks + contract tests</td></tr>
+<tr><td>6</td><td><code>project-6-bughunt</code></td><td>10 injected bugs with repro scripts and fixes</td></tr>
+<tr><td>7</td><td><code>heal.sh</code> + CI</td><td>Whole repo green in one command</td></tr>
+</table>
+
+<div class="card">
+<div class="badge">#1 MIGRATION RUNNER</div>
+<h2>Before/after suites for mechanical migrations</h2>
+<p>Python <code>unittest &#8594; pytest</code> and JS <code>CommonJS &#8594; ESM</code>:
+every file touched, behavior preserved, verified by a parity script.</p>
+<pre><code>cd project-1-migration/python-sample
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python -m unittest discover -s tests -p 'test_legacy_unittest.py' -t .  # 12 pass
+python -m pytest tests/test_migrated_pytest.py -v                       # 15 pass
+python3 check_parity.py                                                 # 10 checks
+
+cd ../js-sample
+node test/test-legacy.cjs                   # 12 asserts
+node --test test/test-migrated.test.mjs     # 13 pass</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#2 COLD-START FEATURE</div>
+<h2>Tags across a layered task tracker</h2>
+<p>Store &#8594; service &#8594; CLI + docs. The agent was handed only
+<code>TASK.md</code> plus a directory listing. Try the feature:</p>
+<pre><code>cd project-2-coldstart/python
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python -m pytest tests/ -q                  # 10 passed
+python -m tasks.cli add "Write report" --tags work,urgent
+python -m tasks.cli list --tag work
+
+cd ../js
+node --test test/tags.test.mjs              # 10 passed
+node src/cli.mjs add "Write report" --tags=work,urgent
+node src/cli.mjs list --tag=work</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#3 TEST-AND-FIX SWARM</div>
+<h2>Thin suite expanded to full coverage</h2>
+<p>A billing module with 2 thin tests, plus the 23-test full suite covering
+every branch, tier boundary, and edge case.</p>
+<pre><code>cd project-3-test-swarm/python
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python -m unittest tests.test_weak -v       # before: 2 tests
+python -m pytest tests/test_full.py -q      # after: 23 passed
+
+cd ../js
+node test/test-weak.mjs                     # before: 2 checks
+node --test test/test-full.test.mjs         # after: 23 passed</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#4 POLYGLOT CLI</div>
+<h2>One CLI scaffolds three languages</h2>
+<p>Each scaffold ships with a working test (<code>node --test</code> /
+<code>go test</code> / <code>cargo test</code>). Real toolchains run only when
+present; otherwise structure and content are verified.</p>
+<pre><code>cd project-4-polyglot
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python -m pytest tests/ -q                  # 12 passed
+python cli/scaffold.py --lang ts --name demo --out /tmp/out
+python cli/scaffold.py --lang go --name demo --out /tmp/out
+python cli/scaffold.py --lang rust --name demo --out /tmp/out
+sh e2e/check.sh                             # E2E OK</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#5 DOCS-TO-CODE</div>
+<h2>Spec &#8594; server + client + mocks</h2>
+<p>Edit the spec, regenerate, test — the full loop in seconds.
+<code>out/</code> is committed and CI fails on regen drift.</p>
+<pre><code>cd project-5-docs-to-code
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python gen/generate.py                      # spec -&gt; out/server.py, client.py, mocks.py
+python -m pytest tests/ -q                  # 10 passed</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#6 BUG-HUNT MARATHON</div>
+<h2>10 injected bugs, repro to fix</h2>
+<p>Off-by-one, shared mutable state, float drift, env leaks, date/async traps.
+<code>proof/before-fix.log</code> preserves the original 0/5 red runs;
+<code>BUGLOG.md</code> scores new hunters; <code>SOLUTIONS.md</code> documents
+all ten fixes.</p>
+<pre><code>cd project-6-bughunt/python
+uv venv &amp;&amp; source .venv/bin/activate &amp;&amp; uv pip install pytest
+python repro/repro.py                       # 5/5 passed
+python -m pytest tests/ -q                  # 7 passed
+
+cd ../js
+node repro/repro.mjs                        # 5/5 passed
+node --test test/regress.test.mjs           # 5 passed</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#7 SELF-HEALING CI</div>
+<h2>Whole repo green in one command</h2>
+<p><code>heal.sh</code> runs every pytest suite, every node suite, the #5 regen
+drift check, and ruff lint with auto-fix. Mirrored per-job by
+<code>.github/workflows/ci.yml</code>, plus a Docker build for the Python suites.</p>
+<pre><code>sh heal.sh                                  # HEALED: all green
+docker build -f docker/Dockerfile -t muse-projects .</code></pre>
+</div>
+
+<footer>Local reference — run the commands from a repo checkout. No external services required.</footer>
+</body>
+</html>
