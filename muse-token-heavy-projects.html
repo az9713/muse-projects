@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muse - Token-Heavy Projects</title>
+<style>
+body{font-family:monospace;max-width:800px;margin:2rem auto;padding:0 1rem;line-height:1.5;background:#fff;color:#111}
+h1{font-size:1.4rem}h2{font-size:1.1rem;margin-top:2rem;border-bottom:1px solid #ccc;padding-bottom:.3rem}
+.card{border:1px solid #ccc;padding:1rem;margin:1rem 0;border-radius:6px}
+.badge{display:inline-block;background:#111;color:#fff;font-size:.75rem;padding:.1rem .5rem;border-radius:4px;margin-bottom:.5rem}
+ul{padding-left:1.2rem}li{margin:.3rem 0}
+code{background:#f0f0f0;padding:.1rem .3rem;border-radius:3px}
+footer{margin-top:2rem;font-size:.8rem;color:#555}
+</style>
+</head>
+<body>
+<h1>Muse - Token-Heavy Projects (Autonomy + Stress-Test)</h1>
+<p>Goal: stress-test limits. Edge: agentic autonomy. Scope: solo weekend builds.<br>Saved: 2026-09-07. Focus: start with #1 and #3.</p>
+
+<h2>Start here</h2>
+
+<div class="card">
+<div class="badge">#1 PRIORITY</div>
+<h3>1. Repo-wide migration runner</h3>
+<p>Migrate a real 50-200 file repo: Jest-&gt;Vitest, ESLint-&gt;Biome, unittest-&gt;pytest, or React class-&gt;hooks.</p>
+<ul>
+<li><b>Why token-heavy:</b> map all files, edit each, fix fallout.</li>
+<li><b>Muse edge:</b> CLI loop <code>read -&gt; edit -&gt; test -&gt; fix</code> vs Cursor/Codex UI dependence.</li>
+<li><b>Run:</b> same repo + one-line prompt. Score: tokens, tool calls, time to green, human interventions.</li>
+<li><b>Weekend slice:</b> pick one 50-file repo, run migration, require green tests.</li>
+</ul>
+</div>
+
+<div class="card">
+<div class="badge">#3 PRIORITY</div>
+<h3>3. Test-and-fix swarm</h3>
+<p>Take a repo with weak tests. Generate integration tests to &gt;80% coverage, then fix all failures found.</p>
+<ul>
+<li><b>Why token-heavy:</b> large generated output, then read own failures.</li>
+<li><b>Muse edge:</b> sustained autonomy vs Claude chat / Grok one-shot.</li>
+<li><b>Run:</b> measure coverage delta, faults found, false positives.</li>
+<li><b>Weekend slice:</b> one module, 20+ tests, full green run.</li>
+</ul>
+</div>
+
+<h2>Full reference list</h2>
+<ul>
+<li><b>2. Cold-start feature in unfamiliar monorepo</b> - add cross-cutting feature from one prompt.</li>
+<li><b>4. Polyglot CLI toolchain</b> - Python CLI generating TS + Go + Rust projects with e2e checks.</li>
+<li><b>5. Docs-to-code reproduction</b> - generate server + client + mocks from 10k-line OpenAPI spec.</li>
+<li><b>6. Bug-hunt marathon</b> - 10 injected bugs, repro-bisect-fix with proof logs.</li>
+<li><b>7. Self-healing CI setup</b> - lint + typecheck + test + Docker + Actions until green.</li>
+</ul>
+
+<h2>Fair comparison checklist</h2>
+<ul>
+<li>Same starting repo + same prompt, no hints</li>
+<li>Log: tokens, tool calls, time, interventions, correct diff size</li>
+<li>Muse wins on 20+ step shell/test loops; skip single-file snippet demos</li>
+</ul>
+
+<h2>Built (2026-09-07)</h2>
+<ul>
+<li><b>#1</b> <code>project-1-migration/python-sample</code> - legacy unittest 12 pass, migrated pytest 15 pass (<code>.venv</code> included). <code>project-1-migration/js-sample</code> - legacy 12 asserts, migrated node:test 13 pass.</li>
+<li><b>#3</b> <code>project-3-test-swarm/python</code> - weak 2 pass, full 23 pass under unittest + pytest (<code>.venv</code> included). <code>project-3-test-swarm/js</code> - weak 2 checks, full 23 pass.</li>
+</ul>
+<footer>Local reference only. No external deps.</footer>
+</body>
+</html>

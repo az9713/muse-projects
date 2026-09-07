@@ -1,0 +1,10 @@
+{
+  "name": "js-test-swarm",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test:weak": "node test/test-weak.mjs",
+    "test:full": "node --test test/test-full.test.mjs"
+  }
+}
