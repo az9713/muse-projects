@@ -1,0 +1,4 @@
+{
+  "hello": "¡Hola, {name}!",
+  "bye": "Adiós, {name}."
+}

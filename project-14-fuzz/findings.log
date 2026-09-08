@@ -1,0 +1,9 @@
+=== RED RUN (naive parser) ===
+FAIL fields=['""'] line='""""""' got ['""""""']
+FAIL fields=[' ', ',', ',', ',', 'bc'] line=' ,",",",",",",bc' got [' ', '"', '"', '"', '"', '"', '"', 'bc']
+FAIL fields=[',', 'x,y', 'say "hi"', 'say "hi"'] line='",","x,y","say ""hi""","say ""hi"""' got ['"', '"', '"x', 'y"', '"say ""hi"""', '"say ""hi"""']
+FAIL fields=[','] line='","' got ['"', '"']
+FAIL fields=['"', '"'] line='"""",""""' got ['""""', '""""']
+195/200 ok
+=== GREEN RUN (quote-aware parser) ===
+5000/5000 ok

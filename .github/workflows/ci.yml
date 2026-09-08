@@ -11,7 +11,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install pytest ruff
+      - run: pip install pytest ruff mypy
       - run: ruff check --fix . && ruff check .
       - run: python -m pytest project-1-migration/python-sample/tests -q
       - run: python -m pytest project-2-coldstart/python/tests -q
@@ -19,7 +19,22 @@ jobs:
       - run: python -m pytest project-4-polyglot/tests -q
       - run: python -m pytest project-5-docs-to-code/tests -q
       - run: python -m pytest project-6-bughunt/python/tests -q
+      - run: python -m pytest project-8-strict-typing/tests -q
+      - run: python -m pytest project-9-traffic-sdk/tests -q
+      - run: python -m pytest project-10-upgrade/tests -q
+      - run: python project-11-log-dashboard/gen_logs.py && python project-11-log-dashboard/analyze.py
+      - run: python -m pytest project-11-log-dashboard/tests -q
+      - run: python -m pytest project-12-config-drift/tests -q
+      - run: python -m pytest project-13-deadcode/tests -q
+      - run: python -m pytest project-14-fuzz/tests -q
+      - run: python -m pytest project-15-i18n/tests -q
+      - run: python project-16-rehearsal/rehearse.py
+      - run: python -m pytest project-16-rehearsal/tests -q
+      - run: python project-17-perf/bench.py && python project-17-perf/gate.py --update-baseline && python project-17-perf/trend.py
+      - run: python -m pytest project-17-perf/tests -q
+      - run: mypy project-8-strict-typing/app
       - run: python project-5-docs-to-code/gen/generate.py && git diff --exit-code -- project-5-docs-to-code/out
+      - run: python project-9-traffic-sdk/gen/build_sdk.py && git diff --exit-code -- project-9-traffic-sdk/out
 
   node:
     runs-on: ubuntu-latest

@@ -15,6 +15,16 @@ scaffolding, docs-to-code generation, bug hunting, and self-healing CI.
 | 5 | `project-5-docs-to-code` | OpenAPI spec → server + client + mocks + contract tests |
 | 6 | `project-6-bughunt` | Bug-hunt marathon: 10 injected bugs with repro + fixes |
 | 7 | `heal.sh` + `docker/` | Self-healing CI: whole repo green in one command |
+| 8 | `project-8-strict-typing` | Untyped code → `mypy --strict` clean, tests green |
+| 9 | `project-9-traffic-sdk` | Access log → inferred endpoints → tested client |
+| 10 | `project-10-upgrade` | Vendor lib v1 → v2 breakages chased across 3 packages |
+| 11 | `project-11-log-dashboard` | 2000 log lines → SQLite + offline HTML report |
+| 12 | `project-12-config-drift` | Drifted envs → findings + unified schema |
+| 13 | `project-13-deadcode` | AST census: dead code removed with green proof |
+| 14 | `project-14-fuzz` | 5000-case fuzz round-trip on a CSV parser |
+| 15 | `project-15-i18n` | UI strings → locales + fallback + CI guard |
+| 16 | `project-16-rehearsal` | SQLite migration with proven rollback |
+| 17 | `project-17-perf` | Benchmarks + trend page + regression gate |
 
 ## Prerequisites
 
@@ -133,4 +143,98 @@ The GitHub workflow mirrors it per-job, plus a Docker build:
 
 ```sh
 docker build -f docker/Dockerfile -t muse-projects .
+```
+
+## 8 — Strict typing (`project-8-strict-typing`)
+
+`before/` is the frozen untyped snapshot; `app/` is the same code under
+`mypy --strict` with an ascent log.
+
+```sh
+cd project-8-strict-typing
+uv venv && source .venv/bin/activate && uv pip install pytest mypy
+python -m pytest tests/ -q                  # 10 passed
+python -m mypy app                          # no issues found
+```
+
+## 9 — Traffic-to-SDK (`project-9-traffic-sdk`)
+
+```sh
+cd project-9-traffic-sdk
+uv venv && source .venv/bin/activate && uv pip install pytest
+python gen/build_sdk.py                     # 5 endpoints inferred
+python -m pytest tests/ -q                  # 10 passed
+```
+
+## 10 — Upgrade cascade (`project-10-upgrade`)
+
+```sh
+cd project-10-upgrade
+uv venv && source .venv/bin/activate && uv pip install pytest
+python -m pytest tests/ -q                  # 8 passed
+```
+
+Breakage order in `UPGRADE.md`: billing rename, notify kwarg, CLI free.
+
+## 11 — Log-to-dashboard (`project-11-log-dashboard`)
+
+```sh
+cd project-11-log-dashboard
+uv venv && source .venv/bin/activate && uv pip install pytest
+python gen_logs.py && python analyze.py     # report.db + report.html
+python -m pytest tests/ -q                  # 8 passed
+```
+
+## 12 — Config drift doctor (`project-12-config-drift`)
+
+```sh
+cd project-12-config-drift
+uv venv && source .venv/bin/activate && uv pip install pytest
+python doctor.py                            # 6 findings
+python -m pytest tests/ -q                  # 8 passed
+```
+
+## 13 — Dead-code census (`project-13-deadcode`)
+
+```sh
+cd project-13-deadcode
+uv venv && source .venv/bin/activate && uv pip install pytest
+python census.py src                        # 0 dead symbols
+python -m pytest tests/ -q                  # 8 passed
+```
+
+## 14 — Fuzz farmer (`project-14-fuzz`)
+
+```sh
+cd project-14-fuzz
+uv venv && source .venv/bin/activate && uv pip install pytest
+python fuzz.py 5000                         # 5000/5000 ok (red run in findings.log)
+python -m pytest tests/ -q                  # 10 passed
+```
+
+## 15 — i18n (`project-15-i18n`)
+
+```sh
+cd project-15-i18n
+uv venv && source .venv/bin/activate && uv pip install pytest
+python tools/check.py                       # missing=0
+python -m pytest tests/ -q                  # 8 passed
+```
+
+## 16 — Migration rehearsal (`project-16-rehearsal`)
+
+```sh
+cd project-16-rehearsal
+uv venv && source .venv/bin/activate && uv pip install pytest
+python rehearse.py                          # REHEARSAL OK, byte-identical
+python -m pytest tests/ -q                  # 8 passed
+```
+
+## 17 — Perf tracker (`project-17-perf`)
+
+```sh
+cd project-17-perf
+uv venv && source .venv/bin/activate && uv pip install pytest
+python bench.py && python gate.py && python trend.py   # GATE OK
+python -m pytest tests/ -q                  # 8 passed
 ```

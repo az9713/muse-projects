@@ -33,6 +33,16 @@ Go, Cargo, and Docker unlock extra checks where noted.</p>
 <tr><td>5</td><td><code>project-5-docs-to-code</code></td><td>Spec &#8594; server + client + mocks + contract tests</td></tr>
 <tr><td>6</td><td><code>project-6-bughunt</code></td><td>10 injected bugs with repro scripts and fixes</td></tr>
 <tr><td>7</td><td><code>heal.sh</code> + CI</td><td>Whole repo green in one command</td></tr>
+<tr><td>8</td><td><code>project-8-strict-typing</code></td><td>Untyped &#8594; mypy strict clean</td></tr>
+<tr><td>9</td><td><code>project-9-traffic-sdk</code></td><td>Traffic &#8594; tested client</td></tr>
+<tr><td>10</td><td><code>project-10-upgrade</code></td><td>Dep bump across 3 packages</td></tr>
+<tr><td>11</td><td><code>project-11-log-dashboard</code></td><td>Logs &#8594; SQLite + report</td></tr>
+<tr><td>12</td><td><code>project-12-config-drift</code></td><td>Drifted envs &#8594; schema</td></tr>
+<tr><td>13</td><td><code>project-13-deadcode</code></td><td>Dead code removed, proven</td></tr>
+<tr><td>14</td><td><code>project-14-fuzz</code></td><td>5000-case parser fuzz</td></tr>
+<tr><td>15</td><td><code>project-15-i18n</code></td><td>Locales + fallback + guard</td></tr>
+<tr><td>16</td><td><code>project-16-rehearsal</code></td><td>Migration + proven rollback</td></tr>
+<tr><td>17</td><td><code>project-17-perf</code></td><td>Benchmarks + trend + gate</td></tr>
 </table>
 
 <div class="card">
@@ -136,6 +146,22 @@ drift check, and ruff lint with auto-fix. Mirrored per-job by
 docker build -f docker/Dockerfile -t muse-projects .</code></pre>
 </div>
 
-<footer>Local reference — run the commands from a repo checkout. No external services required.</footer>
+<div class="card">
+<div class="badge">#8–#12 BATCH 1</div>
+<h2>Typing, SDKs, upgrades, logs, drift</h2>
+<pre><code>for p in project-8-strict-typing project-9-traffic-sdk project-10-upgrade project-11-log-dashboard project-12-config-drift; do
+  (cd $p &amp;&amp; uv venv -q; source .venv/bin/activate &amp;&amp; uv pip install -q pytest &amp;&amp; python -m pytest tests/ -q)
+done  # 10 + 10 + 8 + 8 + 8 passed; plus: mypy app (#8), build_sdk.py (#9), analyze.py (#11), doctor.py (#12)</code></pre>
+</div>
+
+<div class="card">
+<div class="badge">#13–#17 BATCH 2</div>
+<h2>Dead code, fuzz, i18n, rehearsal, perf</h2>
+<pre><code>for p in project-13-deadcode project-14-fuzz project-15-i18n project-16-rehearsal project-17-perf; do
+  (cd $p &amp;&amp; uv venv -q; source .venv/bin/activate &amp;&amp; uv pip install -q pytest &amp;&amp; python -m pytest tests/ -q)
+done  # 8 + 10 + 8 + 8 + 8 passed; plus: census.py, fuzz.py, check.py, rehearse.py, bench/gate/trend</code></pre>
+</div>
+
+<footer>Local reference — run the commands from a repo checkout. No external services required. Build story: dev-journey.html.</footer>
 </body>
 </html>

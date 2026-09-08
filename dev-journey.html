@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Development Journey — projects #8–#17</title>
+<style>
+body{font-family:monospace;max-width:860px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:2rem;border-bottom:1px solid #444;padding-bottom:.3rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.8rem}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+pre code{background:none;padding:0}
+table{border-collapse:collapse;width:100%;font-size:.82rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+blockquote{border-left:3px solid #666;margin:1rem 0;padding:.2rem 1rem;color:#ccc}
+footer{margin:2rem 0;font-size:.8rem;color:#999}
+</style>
+</head>
+<body>
+<h1>Development Journey — projects #8–#17</h1>
+<p><b>Date:</b> 2026-09-08 &nbsp; <b>Repo:</b> github.com/az9713/muse-projects<br>
+<b>Briefs (verbatim):</b></p>
+<blockquote>can you propose another 10 projects to showcase muse code capabilities. they must be different from previous 10. output to a html. do not run yet. just propose.</blockquote>
+<blockquote>can you implement these 10 new projects. ask me if any question</blockquote>
+<blockquote>i wont be able to answer any questions. please make assumptions and document them in a development journey html. work only in cwd and do not delete any file.</blockquote>
+
+<h2>1. How the scoping worked</h2>
+<p>One structured question round ran before autonomy began. Answers locked:
+Python-only (not dual-stack), two batches of five with a commit+push each,
+green-final proof with key logs only (not full red-green everywhere). After
+that the user went offline and every micro-decision below was mine.</p>
+
+<h2>2. Assumptions made (and why)</h2>
+<table>
+<tr><th>#</th><th>Assumption</th><th>Rationale</th></tr>
+<tr><td>A1</td><td>Python-only for all ten; no JS mirrors</td><td>Scoping answer. Keeps every suite runnable with pytest + stdlib.</td></tr>
+<tr><td>A2</td><td>Per-project <code>.venv</code> via <code>uv</code></td><td>House convention from #1–#7; never system installs.</td></tr>
+<tr><td>A3</td><td>Synthetic data generated in-repo (#9 traffic, #11 logs, #16 seed, #17 baseline)</td><td>No external fixtures; deterministic via fixed seeds.</td></tr>
+<tr><td>A4</td><td>#5-style scaled-down specs, not 10k-line inputs (#9 log is 17 lines)</td><td>Same pipeline shape, runs in seconds. Stated in READMEs, not hidden.</td></tr>
+<tr><td>A5</td><td>The #12 SECRET_KEY is an acknowledged fake (<code>EXAMPLE-fake-secret-12345</code>)</td><td>Real secrets never touch the repo; marked at the source file.</td></tr>
+<tr><td>A6</td><td>CI/docker extended to new suites; docker build itself unverified locally</td><td>No daemon in this environment; stated, not implied.</td></tr>
+<tr><td>A7</td><td>Ruff gate applies to all new code; auto-fix may touch files mid-build</td><td>Established in #7. Caused finding F-R1 below — fixed at the source.</td></tr>
+<tr><td>A8</td><td>Nothing deleted; <code>muse.png</code> and <code>proposals.html</code> left untracked/uncommitted</td><td>User constraint; pre-existing files are not mine to publish.</td></tr>
+</table>
+
+<h2>3. Design decisions</h2>
+<p><b>#9 folding:</b> first attempt used a numeric-segment regex, but the traffic
+also held <code>/products/abc</code> and <code>/orders/9999</code>. Replaced with
+parent-group folding — a non-root parent with several distinct children is an id
+slot. Root-level paths never fold.</p>
+<p><b>#13 census roots:</b> entry-module functions (<code>app</code>) count as reachable
+roots; anything else unimported is dead. Fixtures keep planted dead code so the
+tool stays testable after <code>src/</code> went clean.</p>
+<p><b>#14 honesty:</b> wrote the naive splitter first, captured the red fuzz run
+in <code>findings.log</code>, then fixed — same red-green discipline as #6.</p>
+<p><b>#16 rehearsal:</b> the log asserts byte-identical user rows across a v3
+excursion, not just version numbers.</p>
+
+<h2>4. What went wrong, and the fixes</h2>
+<p><b>F-1 (#8):</b> <code>test_create_normalizes_tags — AssertionError</code>.
+The typed rewrite dropped tag normalization the test required. Fix: normalize
+(strip/lower/dedupe) inside <code>new_task</code>, reject empties.</p>
+<p><b>F-2 (#8):</b> <code>mypy ... Found 1 error in 1 file</code> —
+<code>int(row["id"])</code> on an <code>object</code> value. Fix:
+<code>int(str(row["id"]))</code> plus <code>isinstance</code> narrowing for tags;
+zero <code>type: ignore</code> comments in the final code.</p>
+<p><b>F-3 (#9):</b> <code>inferred 8 endpoints</code>, expected 5 — the fold regex
+was double-escaped (<code>r"/\\d+"</code>) so nothing folded. Fixed regex, then
+replaced the approach with parent-group folding (see §3).</p>
+<p><b>F-4 (#9):</b> <code>'GET /orders/1001' not found in {...}</code>. The test was
+right and the fixture incomplete — added the missing sample instead of weakening
+the test.</p>
+<p><b>F-5 (#10):</b> my own no-v1-imports test only inspected the last file
+(loop variable overwrite). Rewrote to check all three call sites by path.</p>
+<p><b>F-6 (#11):</b> <code>FileNotFoundError: tests/logs/access.log</code> — tests
+resolved paths beside themselves instead of the project root. Fixed with a
+<code>ROOT</code> constant.</p>
+<p><b>F-7 (#13):</b> <code>'HELLO,   ANN' != 'HELLO, ANN'</code> — test assumed
+stripping the implementation never did. Fixed the test input, not the code.</p>
+<p><b>F-8 (#16):</b> rehearsal seeded rows before <code>up(v1)</code> created the
+table. Rewrote the script with strict create-then-seed order.</p>
+<p><b>F-R1 (process):</b> <code>heal.sh</code> reported
+<code>FAIL regen #5</code> — an old ruff auto-fix had reformatted generated
+<code>out/client.py</code> without updating the generator. Fixed the generator
+template (import order) so regen is byte-clean again. Rule learned: <b>generated
+files are fixed at the generator, never in the output.</b></p>
+
+<h2>5. Tools used</h2>
+<table>
+<tr><th>Tool</th><th>Use this session</th></tr>
+<tr><td>write_file / edit_file</td><td>All ~60 project files, READMEs, journey docs</td></tr>
+<tr><td>bash</td><td>venvs, pytest, mypy, node, repro/fuzz/rehearsal runs, git/gh</td></tr>
+<tr><td>uv / uvx</td><td>Per-project venvs, pytest/mypy installs, ruff gate</td></tr>
+<tr><td>gh CLI</td><td>Push verification, Pages/About work (earlier turns)</td></tr>
+<tr><td>request_user_input</td><td>One scoping round (stack, batches, proof depth)</td></tr>
+<tr><td>read_skill</td><td>dev-journey (this doc's structure), python-env, git, taste</td></tr>
+</table>
+
+<h2>6. Verification</h2>
+<pre><code>Batch 1: 10 + 10 + 8 + 8 + 8 = 44 passed, mypy --strict clean
+Batch 2: 8 + 10 + 8 + 8 + 8 = 42 passed
+Full heal.sh: HEALED, ruff clean, all node suites pass
+git log: batch commits pushed, working tree holds only untracked muse.png</code></pre>
+<p><b>Not verified:</b> Docker image build (no daemon locally — builds in CI);
+Go e2e leg in #4 (no toolchain); GitHub Actions runs themselves (workflow file
+reviewed, steps mirror locally-verified commands).</p>
+
+<h2>7. Where things stand</h2>
+<p>All 17 projects built, green, and pushed. Unfinished: head-to-head agent
+scoring runs (needs other agents), CI badge, and publishing
+<code>proposals.html</code> (left untracked deliberately). Next options: run the
+comparisons, or pick the next 10.</p>
+
+<footer>Written from the live session. Failures quoted verbatim; no victory-lap edits.</footer>
+</body>
+</html>

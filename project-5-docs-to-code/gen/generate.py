@@ -90,7 +90,7 @@ def gen_client(spec):
     assert {"getHealth", "listTasks", "createTask", "getTask"} <= set(methods)
     return (
         HEADER
-        + "import json\nimport urllib.request\nimport urllib.error\n\n\n"
+        + "import json\nimport urllib.error\nimport urllib.request\n\n\n"
         + "class ApiError(Exception):\n"
         + "    def __init__(self, code, body):\n"
         + "        super().__init__(f'HTTP {code}: {body}')\n"

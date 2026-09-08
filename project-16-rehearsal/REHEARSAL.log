@@ -1,0 +1,4 @@
+seeded v1, users=[(1, 'ann'), (2, 'bo'), (3, 'cy')]
+migrated to v3, emails backfilled, orders table present, users=3
+rolled back to v1, users byte-identical: True
+REHEARSAL OK

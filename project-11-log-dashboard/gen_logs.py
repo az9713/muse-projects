@@ -1,6 +1,8 @@
 """Generate a deterministic synthetic access log (2000 lines, seed fixed)."""
+import os
 import random
 
+HERE = os.path.dirname(os.path.abspath(__file__))
 random.seed(20260907)
 
 PATHS = ["/health", "/products", "/products/42", "/orders", "/orders/1001", "/search"]
@@ -15,7 +17,7 @@ def latency(path, error):
     return max(1, int(random.gauss(base, base / 4)) + (2000 if error else 0))
 
 
-with open("logs/access.log", "w", encoding="utf-8") as fh:
+with open(os.path.join(HERE, "logs", "access.log"), "w", encoding="utf-8") as fh:
     for i in range(2000):
         path = random.choices(PATHS, WEIGHTS)[0]
         error = random.random() < (0.02 if path != "/search" else 0.08)

@@ -1,0 +1,5 @@
+{
+  "hello": "Hello, {name}!",
+  "bye": "Goodbye, {name}.",
+  "inbox": "You have {count} messages."
+}

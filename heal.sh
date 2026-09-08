@@ -5,7 +5,16 @@ set -u
 fail=0
 note() { echo "== $1"; }
 
-PY_PROJS="project-1-migration/python-sample project-2-coldstart/python project-3-test-swarm/python project-4-polyglot project-5-docs-to-code project-6-bughunt/python"
+PY_PROJS="project-1-migration/python-sample project-2-coldstart/python project-3-test-swarm/python project-4-polyglot project-5-docs-to-code project-6-bughunt/python project-8-strict-typing project-9-traffic-sdk project-10-upgrade project-11-log-dashboard project-12-config-drift project-13-deadcode project-14-fuzz project-15-i18n project-16-rehearsal project-17-perf"
+
+note "generated prerequisites (#11, #16, #17)"
+python3 project-11-log-dashboard/gen_logs.py >/dev/null && python3 project-11-log-dashboard/analyze.py >/dev/null \
+  && echo "PASS #11 artifacts" || { echo "FAIL #11 artifacts"; fail=1; }
+python3 project-16-rehearsal/rehearse.py >/dev/null \
+  && echo "PASS #16 rehearsal" || { echo "FAIL #16 rehearsal"; fail=1; }
+python3 project-17-perf/bench.py --repeat 3 >/dev/null && python3 project-17-perf/gate.py --update-baseline >/dev/null \
+  && python3 project-17-perf/trend.py >/dev/null && echo "PASS #17 artifacts" \
+  || { echo "FAIL #17 artifacts"; fail=1; }
 for proj in $PY_PROJS; do
   tdir="$proj/tests"
   if [ ! -x "$proj/.venv/bin/python" ]; then
@@ -23,12 +32,25 @@ for proj in $PY_PROJS; do
   fi
 done
 
-note "regen check (#5)"
+note "regen checks (#5, #9)"
 project-5-docs-to-code/.venv/bin/python project-5-docs-to-code/gen/generate.py
 if git diff --quiet -- project-5-docs-to-code/out 2>/dev/null; then
-  echo "PASS regen: out/ fresh"
+  echo "PASS regen #5: out/ fresh"
 else
-  echo "FAIL regen: out/ drifted (commit the regenerated files)"; fail=1
+  echo "FAIL regen #5: out/ drifted (commit the regenerated files)"; fail=1
+fi
+project-9-traffic-sdk/.venv/bin/python project-9-traffic-sdk/gen/build_sdk.py >/dev/null
+if git diff --quiet -- project-9-traffic-sdk/out 2>/dev/null; then
+  echo "PASS regen #9: out/ fresh"
+else
+  echo "FAIL regen #9: out/ drifted (commit the regenerated files)"; fail=1
+fi
+
+note "mypy strict (#8)"
+if project-8-strict-typing/.venv/bin/python -m mypy project-8-strict-typing/app 2>&1 | tail -1; then
+  echo "PASS mypy"
+else
+  echo "FAIL mypy"; fail=1
 fi
 
 note "node suites"
