@@ -1,0 +1,32 @@
+[
+  {
+    "id": "F1",
+    "severity": "medium",
+    "detail": "TIMEOUT differs: {'dev.env': '30', 'staging.env': '60', 'prod.env': '120'}"
+  },
+  {
+    "id": "F2",
+    "severity": "high",
+    "detail": "RETRIES missing in: ['prod.env']"
+  },
+  {
+    "id": "F3",
+    "severity": "medium",
+    "detail": "DEBUG on outside dev: ['staging.env']"
+  },
+  {
+    "id": "F4",
+    "severity": "critical",
+    "detail": "secret committed in: ['prod.env']"
+  },
+  {
+    "id": "F5",
+    "severity": "high",
+    "detail": "non-dev DB_HOST=localhost: ['prod.env']"
+  },
+  {
+    "id": "F6",
+    "severity": "low",
+    "detail": "keys in one env only: ['UNUSED_FLAG']"
+  }
+]

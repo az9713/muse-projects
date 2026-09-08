@@ -1,0 +1,16 @@
+GET /health 200
+GET /health 200
+GET /products 200
+GET /products 200
+GET /products/42 200
+GET /products/7 200
+GET /products/abc 404
+POST /orders 201 {"sku": "widget", "qty": 2}
+POST /orders 201 {"sku": "gadget", "qty": 1}
+POST /orders 400 {"qty": 1}
+GET /orders/1001 200
+GET /orders/9999 404
+GET /health 200
+GET /products 200
+GET /products/42 200
+POST /orders 201 {"sku": "widget", "qty": 5}

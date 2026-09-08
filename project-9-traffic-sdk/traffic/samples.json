@@ -1,0 +1,7 @@
+{
+  "GET /health": {"ok": true, "version": "2.3.1"},
+  "GET /products": [{"sku": "widget", "price": 10.0}, {"sku": "gadget", "price": 25.5}],
+  "GET /products/42": {"sku": "widget", "price": 10.0, "stock": 30},
+  "POST /orders": {"id": 1001, "sku": "widget", "qty": 2, "total": 20.0},
+  "GET /orders/1001": {"id": 1001, "sku": "widget", "qty": 2, "total": 20.0}
+}

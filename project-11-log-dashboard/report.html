@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8"><title>Traffic report</title>
+<style>body{font-family:monospace;background:#161616;color:#e8e8e8;max-width:800px;margin:2rem auto;padding:0 1rem}
+table{border-collapse:collapse}td,th{border:1px solid #444;padding:.3rem .6rem}</style>
+</head><body>
+<h1>Traffic report</h1>
+<p>requests=2000 errors=53 p50=36ms
+p95=372ms mean=123.3ms</p>
+<h2>Per path (requests, avg ms, p95 ms)</h2>
+<table><tr><th>path</th><th>n</th><th>avg</th><th>p95</th></tr><tr><td>/health</td><td>591</td><td>36.4</td><td>4</td></tr>
+<tr><td>/products</td><td>515</td><td>78.4</td><td>58</td></tr>
+<tr><td>/orders</td><td>295</td><td>162.7</td><td>172</td></tr>
+<tr><td>/products/42</td><td>269</td><td>87.9</td><td>53</td></tr>
+<tr><td>/search</td><td>229</td><td>457.0</td><td>2295</td></tr>
+<tr><td>/orders/1001</td><td>101</td><td>83.4</td><td>36</td></tr></table>
+<h2>Errors per hour (peak 1757203200 with 5)</h2>
+<pre><div>1757199600 errors=1 ########</div>
+<div>1757203200 errors=5 ########################################</div>
+<div>1757206800 errors=1 ########</div>
+<div>1757210400 errors=1 ########</div>
+<div>1757214000 errors=0 #</div>
+<div>1757217600 errors=4 ################################</div>
+<div>1757221200 errors=2 ################</div>
+<div>1757224800 errors=4 ################################</div>
+<div>1757228400 errors=2 ################</div>
+<div>1757232000 errors=2 ################</div>
+<div>1757235600 errors=4 ################################</div>
+<div>1757239200 errors=2 ################</div>
+<div>1757242800 errors=3 ########################</div>
+<div>1757246400 errors=2 ################</div>
+<div>1757250000 errors=2 ################</div>
+<div>1757253600 errors=1 ########</div>
+<div>1757257200 errors=4 ################################</div>
+<div>1757260800 errors=0 #</div>
+<div>1757264400 errors=0 #</div>
+<div>1757268000 errors=4 ################################</div>
+<div>1757271600 errors=3 ########################</div>
+<div>1757275200 errors=3 ########################</div>
+<div>1757278800 errors=0 #</div>
+<div>1757282400 errors=3 ########################</div></pre>
+</body></html>

@@ -1,0 +1,25 @@
+{
+  "required": [
+    "APP_PORT",
+    "TIMEOUT",
+    "RETRIES",
+    "DEBUG",
+    "DB_HOST",
+    "LOG_LEVEL"
+  ],
+  "types": {
+    "APP_PORT": "int",
+    "TIMEOUT": "int",
+    "RETRIES": "int",
+    "DEBUG": "bool",
+    "DB_HOST": "str",
+    "LOG_LEVEL": "str"
+  },
+  "rules": [
+    "TIMEOUT must be identical in every env",
+    "RETRIES must be present in every env",
+    "DEBUG must be false outside dev",
+    "DB_HOST must not be localhost outside dev",
+    "no SECRET_* keys may be committed"
+  ]
+}
