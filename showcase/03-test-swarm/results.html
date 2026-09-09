@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>#3 Test-and-fix swarm</title><style>body{font-family:monospace;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.8rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.78rem;white-space:pre-wrap}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+.pass{color:#7dd87d;font-weight:bold}.fail{color:#ff7b7b;font-weight:bold}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+a{color:#8ab4ff}
+footer{margin:2rem 0;font-size:.8rem;color:#999}</style></head><body><p><a href='index.html'>&larr; all projects</a></p><h1>#3 Test-and-fix swarm</h1><p>2 thin tests expanded to 23 per language.</p>
+<h2>$ pytest full (23) <span class='pass'>PASS (exit 0)</span></h2><pre>.......................                                                  [100%]
+23 passed in 0.26s
+</pre>
+<h2>$ node full (23) <span class='pass'>PASS (exit 0)</span></h2><pre>TAP version 13
+# Subtest: lineTotal
+    # Subtest: basic
+    ok 1 - basic
+      ---
+      duration_ms: 0.565104
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: zero qty
+    ok 2 - zero qty
+      ---
+      duration_ms: 0.142596
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rounding
+    ok 3 - rounding
+      ---
+      duration_ms: 0.08142
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects negative qty
+    ok 4 - rejects negative qty
+      ---
+      duration_ms: 0.271735
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects negative price
+    ok 5 - rejects negative price
+      ---
+      duration_ms: 0.090575
+      type: &#x27;test&#x27;
+      ...
+    1..5
+ok 1 - lineTotal
+  ---
+  duration_ms: 1.945224
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: discountRate
+    # Subtest: none below 10
+    ok 1 - none below 10
+      ---
+      duration_ms: 0.1245
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 5% at 10
+    ok 2 - 5% at 10
+      ---
+      duration_ms: 0.124578
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 5% at 49
+    ok 3 - 5% at 49
+      ---
+      duration_ms: 0.186238
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 10% at 50
+    ok 4 - 10% at 50
+      ---
+      duration_ms: 0.197748
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 10% at 99
+    ok 5 - 10% at 99
+      ---
+      duration_ms: 0.171752
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 20% at 100
+    ok 6 - 20% at 100
+      ---
+      duration_ms: 0.061585
+      type: &#x27;test&#x27;
+      ...
+    1..6
+ok 2 - discountRate
+  ---
+  duration_ms: 1.110543
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: applyDiscount
+    # Subtest: no discount
+    ok 1 - no discount
+      ---
+      duration_ms: 0.085309
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 5%
+    ok 2 - 5%
+      ---
+      duration_ms: 0.038553
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: 20%
+    ok 3 - 20%
+      ---
+      duration_ms: 0.03657
+      type: &#x27;test&#x27;
+      ...
+    1..3
+ok 3 - applyDiscount
+  ---
+  duration_ms: 0.229327
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: withTax
+    # Subtest: default rate
+    ok 1 - default rate
+      ---
+      duration_ms: 0.739305
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: zero rate
+    ok 2 - zero rate
+      ---
+      duration_ms: 0.066031
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects negative rate
+    ok 3 - rejects negative rate
+      ---
+      duration_ms: 0.065112
+      type: &#x27;test&#x27;
+      ...
+    1..3
+ok 4 - withTax
+  ---
+  duration_ms: 0.936098
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: invoice
+    # Subtest: single unit
+    ok 1 - single unit
+      ---
+      duration_ms: 0.541641
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: bulk discount
+    ok 2 - bulk discount
+      ---
+      duration_ms: 0.056919
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: zero qty
+    ok 3 - zero qty
+      ---
+      duration_ms: 0.047168
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: custom tax
+    ok 4 - custom tax
+      ---
+      duration_ms: 0.09711
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: mid tier
+    ok 5 - mid tier
+      ---
+      duration_ms: 0.05621
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: keys
+    ok 6 - keys
+      ---
+      duration_ms: 0.056742
+      type: &#x27;test&#x27;
+      ...
+    1..6
+ok 5 - invoice
+  ---
+  duration_ms: 0.996197
+  type: &#x27;suite&#x27;
+  ...
+1..5
+# tests 23
+# suites 5
+# pass 23
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 94.66313
+</pre><footer>Captured 2026-09-08 23:34 UTC by showcase/build.py</footer></body></html>

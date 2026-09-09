@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>#2 Cold-start feature</title><style>body{font-family:monospace;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.8rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.78rem;white-space:pre-wrap}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+.pass{color:#7dd87d;font-weight:bold}.fail{color:#ff7b7b;font-weight:bold}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+a{color:#8ab4ff}
+footer{margin:2rem 0;font-size:.8rem;color:#999}</style></head><body><p><a href='index.html'>&larr; all projects</a></p><h1>#2 Cold-start feature</h1><p>Tags across store, service, CLI, docs from one TASK.md.</p>
+<h2>$ pytest tags (10) <span class='pass'>PASS (exit 0)</span></h2><pre>..........                                                               [100%]
+10 passed in 0.29s
+</pre>
+<h2>$ node tags (10) <span class='pass'>PASS (exit 0)</span></h2><pre>TAP version 13
+# Subtest: tags
+    # Subtest: creates with normalized tags
+    ok 1 - creates with normalized tags
+      ---
+      duration_ms: 1.665876
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: creates without tags
+    ok 2 - creates without tags
+      ---
+      duration_ms: 0.811098
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: dedupes tags
+    ok 3 - dedupes tags
+      ---
+      duration_ms: 0.69799
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects empty tags
+    ok 4 - rejects empty tags
+      ---
+      duration_ms: 0.921377
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: filters by tag
+    ok 5 - filters by tag
+      ---
+      duration_ms: 1.247411
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: filters case-insensitively
+    ok 6 - filters case-insensitively
+      ---
+      duration_ms: 0.903744
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects empty tag filter
+    ok 7 - rejects empty tag filter
+      ---
+      duration_ms: 0.569689
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: opens with tag
+    ok 8 - opens with tag
+      ---
+      duration_ms: 1.396508
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: keeps title validation
+    ok 9 - keeps title validation
+      ---
+      duration_ms: 1.8997
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: keeps done flow
+    ok 10 - keeps done flow
+      ---
+      duration_ms: 0.983975
+      type: &#x27;test&#x27;
+      ...
+    1..10
+ok 1 - tags
+  ---
+  duration_ms: 12.276814
+  type: &#x27;suite&#x27;
+  ...
+1..1
+# tests 10
+# suites 1
+# pass 10
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 108.481239
+</pre><footer>Captured 2026-09-08 23:34 UTC by showcase/build.py</footer></body></html>

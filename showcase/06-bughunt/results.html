@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>#6 Bug-hunt marathon</title><style>body{font-family:monospace;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.8rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.78rem;white-space:pre-wrap}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+.pass{color:#7dd87d;font-weight:bold}.fail{color:#ff7b7b;font-weight:bold}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+a{color:#8ab4ff}
+footer{margin:2rem 0;font-size:.8rem;color:#999}</style></head><body><p><a href='index.html'>&larr; all projects</a></p><h1>#6 Bug-hunt marathon</h1><p>10 injected bugs, repro to fix, proof logs kept.</p>
+<h2>$ python repro (5/5) <span class='pass'>PASS (exit 0)</span></h2><pre>PASS B1 bulk_rate(100) == 0.20
+PASS B2 add_note isolated
+PASS B3 line_total(0.1, 3) == 0.3
+PASS B4 receipt hides cost by default
+PASS B5 promo over year boundary
+5/5 passed
+</pre>
+<h2>$ pytest regress (7) <span class='pass'>PASS (exit 0)</span></h2><pre>.......                                                                  [100%]
+7 passed in 0.30s
+</pre>
+<h2>$ node repro (5/5) <span class='pass'>PASS (exit 0)</span></h2><pre>PASS J1 page has full size
+PASS J2 catalog shielded
+PASS J3 promo expires Dec 2026
+PASS J4 total is a number
+PASS J5 checkout adds fee
+5/5 passed
+</pre>
+<h2>$ node regress (5) <span class='pass'>PASS (exit 0)</span></h2><pre>TAP version 13
+# Subtest: fixed
+    # Subtest: J1 pages fully
+    ok 1 - J1 pages fully
+      ---
+      duration_ms: 1.099875
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: J2 catalog immutable via getter
+    ok 2 - J2 catalog immutable via getter
+      ---
+      duration_ms: 0.148801
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: J3 promo expiry is Dec 2026
+    ok 3 - J3 promo expiry is Dec 2026
+      ---
+      duration_ms: 0.364956
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: J4 total awaits rate
+    ok 4 - J4 total awaits rate
+      ---
+      duration_ms: 0.390269
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: J5 checkout numeric
+    ok 5 - J5 checkout numeric
+      ---
+      duration_ms: 0.119851
+      type: &#x27;test&#x27;
+      ...
+    1..5
+ok 1 - fixed
+  ---
+  duration_ms: 3.647163
+  type: &#x27;suite&#x27;
+  ...
+1..1
+# tests 5
+# suites 1
+# pass 5
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 97.898474
+</pre><footer>Captured 2026-09-08 23:34 UTC by showcase/build.py</footer></body></html>

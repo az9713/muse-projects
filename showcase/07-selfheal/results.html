@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>#7 Self-healing CI</title><style>body{font-family:monospace;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.8rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.78rem;white-space:pre-wrap}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+.pass{color:#7dd87d;font-weight:bold}.fail{color:#ff7b7b;font-weight:bold}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+a{color:#8ab4ff}
+footer{margin:2rem 0;font-size:.8rem;color:#999}</style></head><body><p><a href='index.html'>&larr; all projects</a></p><h1>#7 Self-healing CI</h1><p>The whole repo, one command.</p>
+<h2>$ heal.sh <span class='pass'>PASS (exit 0)</span></h2><pre>== generated prerequisites (#11, #16, #17)
+PASS #11 artifacts
+PASS #16 rehearsal
+PASS #17 artifacts
+...........................                                              [100%]
+27 passed in 0.53s
+PASS project-1-migration/python-sample
+..........                                                               [100%]
+10 passed in 0.27s
+PASS project-2-coldstart/python
+.........................                                                [100%]
+25 passed in 0.48s
+PASS project-3-test-swarm/python
+............                                                             [100%]
+12 passed in 0.61s
+PASS project-4-polyglot
+..........                                                               [100%]
+10 passed in 0.87s
+PASS project-5-docs-to-code
+.......                                                                  [100%]
+7 passed in 0.29s
+PASS project-6-bughunt/python
+..........                                                               [100%]
+10 passed in 0.22s
+PASS project-8-strict-typing
+..........                                                               [100%]
+10 passed in 0.24s
+PASS project-9-traffic-sdk
+........                                                                 [100%]
+8 passed in 0.31s
+PASS project-10-upgrade
+........                                                                 [100%]
+8 passed in 0.19s
+PASS project-11-log-dashboard
+........                                                                 [100%]
+8 passed in 0.37s
+PASS project-12-config-drift
+........                                                                 [100%]
+8 passed in 0.34s
+PASS project-13-deadcode
+..........                                                               [100%]
+10 passed in 0.23s
+PASS project-14-fuzz
+........                                                                 [100%]
+8 passed in 0.34s
+PASS project-15-i18n
+........                                                                 [100%]
+8 passed in 0.67s
+PASS project-16-rehearsal
+........                                                                 [100%]
+8 passed in 0.71s
+PASS project-17-perf
+== regen checks (#5, #9)
+wrote out/server.py
+wrote out/client.py
+wrote out/mocks.py
+PASS regen #5: out/ fresh
+PASS regen #9: out/ fresh
+== mypy strict (#8)
+Success: no issues found in 4 source files
+PASS mypy
+== node suites
+PASS node project-1-migration/js-sample/test/test-legacy.cjs
+PASS node --test project-1-migration/js-sample/test/test-migrated.test.mjs
+PASS node --test project-2-coldstart/js/test/tags.test.mjs
+PASS node project-3-test-swarm/js/test/test-weak.mjs
+PASS node --test project-3-test-swarm/js/test/test-full.test.mjs
+PASS sh project-4-polyglot/e2e/check.sh
+PASS node project-6-bughunt/js/repro/repro.mjs
+PASS node --test project-6-bughunt/js/test/regress.test.mjs
+== lint (ruff, auto-fix)
+
+Found 1 error.
+
+Found 1 error.
+PASS ruff
+HEALED: all green
+</pre><footer>Captured 2026-09-08 23:34 UTC by showcase/build.py</footer></body></html>

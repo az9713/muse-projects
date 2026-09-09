@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html><head><meta charset='utf-8'><meta name='viewport' content='width=device-width, initial-scale=1'><title>#1 Migration runner</title><style>body{font-family:monospace;max-width:900px;margin:2rem auto;padding:0 1rem;line-height:1.55;color:#e8e8e8;background:#161616}
+h1{font-size:1.4rem}h2{font-size:1.05rem;margin-top:1.8rem}
+pre{background:#222;padding:.8rem;border-radius:6px;overflow-x:auto;font-size:.78rem;white-space:pre-wrap}
+code{background:#2a2a2a;padding:.1rem .3rem;border-radius:3px}
+.pass{color:#7dd87d;font-weight:bold}.fail{color:#ff7b7b;font-weight:bold}
+table{border-collapse:collapse;width:100%;font-size:.84rem}
+th,td{border:1px solid #444;padding:.35rem .5rem;text-align:left;vertical-align:top}
+a{color:#8ab4ff}
+footer{margin:2rem 0;font-size:.8rem;color:#999}</style></head><body><p><a href='index.html'>&larr; all projects</a></p><h1>#1 Migration runner</h1><p>unittest to pytest, CommonJS to ESM, parity-proven.</p>
+<h2>$ pytest migrated (15) <span class='pass'>PASS (exit 0)</span></h2><pre>...............                                                          [100%]
+15 passed in 0.62s
+</pre>
+<h2>$ node migrated (13) <span class='pass'>PASS (exit 0)</span></h2><pre>TAP version 13
+# Subtest: calc
+    # Subtest: adds
+    ok 1 - adds
+      ---
+      duration_ms: 0.828249
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: subtracts
+    ok 2 - subtracts
+      ---
+      duration_ms: 0.202794
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: multiplies
+    ok 3 - multiplies
+      ---
+      duration_ms: 0.198904
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: divides
+    ok 4 - divides
+      ---
+      duration_ms: 0.307965
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects division by zero
+    ok 5 - rejects division by zero
+      ---
+      duration_ms: 1.080173
+      type: &#x27;test&#x27;
+      ...
+    1..5
+ok 1 - calc
+  ---
+  duration_ms: 6.782796
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: strings
+    # Subtest: slugifies
+    ok 1 - slugifies
+      ---
+      duration_ms: 1.028369
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: keeps short text
+    ok 2 - keeps short text
+      ---
+      duration_ms: 0.461442
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: truncates long text
+    ok 3 - truncates long text
+      ---
+      duration_ms: 0.476048
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: counts words
+    ok 4 - counts words
+      ---
+      duration_ms: 0.373285
+      type: &#x27;test&#x27;
+      ...
+    1..4
+ok 2 - strings
+  ---
+  duration_ms: 3.008453
+  type: &#x27;suite&#x27;
+  ...
+# Subtest: stats
+    # Subtest: means
+    ok 1 - means
+      ---
+      duration_ms: 0.223022
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: rejects empty mean
+    ok 2 - rejects empty mean
+      ---
+      duration_ms: 0.160999
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: clamps
+    ok 3 - clamps
+      ---
+      duration_ms: 0.086407
+      type: &#x27;test&#x27;
+      ...
+    # Subtest: computes pct change
+    ok 4 - computes pct change
+      ---
+      duration_ms: 0.058367
+      type: &#x27;test&#x27;
+      ...
+    1..4
+ok 3 - stats
+  ---
+  duration_ms: 0.666831
+  type: &#x27;suite&#x27;
+  ...
+1..3
+# tests 13
+# suites 3
+# pass 13
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 161.688634
+</pre>
+<h2>$ parity script <span class='pass'>PASS (exit 0)</span></h2><pre>PARITY OK: 10 checks passed
+</pre><footer>Captured 2026-09-08 23:34 UTC by showcase/build.py</footer></body></html>
